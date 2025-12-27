@@ -1,0 +1,25 @@
+services:
+  vectordb:
+    image: pgvector/pgvector:pg16
+    container_name: postgres-vector-w2
+    hostname: vectordb
+    restart: unless-stopped
+
+    environment:
+      - POSTGRES_USER=vector_admin
+      - POSTGRES_PASSWORD=vector_password
+      - POSTGRES_DB=semantic_search_db
+
+    ports:
+      - "5433:5432"
+
+    volumes:
+      - pgvector_data:/var/lib/postgresql/data
+      - ./init-scripts:/docker-entrypoint-initdb.d
+
+    shm_size: 1gb
+
+
+volumes:
+  pgvector_data:
+    driver: local
