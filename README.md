@@ -1,5 +1,3 @@
-# RAG This Doc
-
 This project is a **RAG (Retrieval-Augmented Generation)** application built with **FastAPI**, designed to allow the ingestion of PDF documents and asking questions about their content using Large Language Models (LLMs).
 
 The system processes documents, generates vector embeddings, and stores them in a **PostgreSQL** database with the **pgvector** extension. Queries can be answered using **Google Gemini** or local models via **Ollama** (such as Llama 3).
