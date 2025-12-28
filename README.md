@@ -81,6 +81,7 @@ The API will be available at `http://localhost:8000`.
 
 ## Web Interface
 ```bash
+cd web/
 python3 -m http.server 8002
 # or use an extension like live server, it will work the same.
 ```
