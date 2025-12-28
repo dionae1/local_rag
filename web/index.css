@@ -87,3 +87,11 @@
     cursor: pointer;
     margin-bottom: 1rem;
 }
+
+#emptyMessage {
+    text-align: center;
+    margin: 1rem;
+    font-size: 1rem;
+    color: #555;
+    font-style: italic;
+}

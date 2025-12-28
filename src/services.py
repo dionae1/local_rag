@@ -58,7 +58,7 @@ class UploadService:
         self.db.insert_documents(data_to_insert)
 
 
-class DBService:
+class DBEngineService:
     def __init__(self):
         self.db = VectorDB()
         self.engine = EmbeddingEngine()
@@ -92,6 +92,14 @@ class DBService:
     
     def ollama_answer(self, question: str):
         return self._answer(question, model="ollama")
-    
+
+
+class DBService:
+    def __init__(self):
+        self.db = VectorDB()
+
+    def check_empty(self) -> bool:
+        return self.db.is_empty()
+        
     def clear_database(self):
         self.db.delete_all_documents()

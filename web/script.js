@@ -12,6 +12,8 @@ const uploadLoading = document.getElementById('uploadLoading');
 const answerLoading = document.getElementById('answerLoading');
 const restartLoading = document.getElementById('restartLoading');
 
+const emptyMessage = document.getElementById('emptyMessage');
+
 const baseURL = "http://127.0.0.1:8000"
 
 uploadButton.addEventListener('click', async () => {
@@ -101,5 +103,32 @@ restartButton.addEventListener('click', async () => {
         console.error('Error:', error);
     } finally {
         restartLoading.classList.add('hidden');
+    }
+});
+
+document.addEventListener('DOMContentLoaded', async () => {
+    try {
+        response = await fetch(`${baseURL}/is-empty/`, {
+            method: 'GET'
+        });
+
+        data = await response.json();
+
+        if (!response.ok) {
+            alert('Failed to check database: ' + (data.detail || 'Unknown error'));
+            throw new Error(data.detail || 'Check database failed');
+        }
+
+        if (data.is_empty) {
+            restartButton.disabled = true;
+            geminiAskButton.disabled = true;
+            llamaAskButton.disabled = true;
+        } else {
+            emptyMessage.textContent = "";
+            restartButton.disabled = false;
+        }
+
+    } catch (error) {
+        console.error('Error:', error);
     }
 });

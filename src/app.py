@@ -1,4 +1,4 @@
-from services import UploadService, DBService
+from services import UploadService, DBEngineService, DBService
 
 from pathlib import Path
 from pydantic import BaseModel
@@ -50,13 +50,13 @@ def upload_document(request: PDFRequest):
 
 
 @app.post("/query-gemini/")
-def query_documents(request: QueryRequest, service: DBService = Depends(DBService)):
+def query_documents(request: QueryRequest, service: DBEngineService = Depends(DBEngineService)):
     results = service.gemini_answer(request.question)
     return {"results": results}
 
 
 @app.post("/query-ollama/")
-def query_documents_ollama(request: QueryRequest, service: DBService = Depends(DBService)):
+def query_documents_ollama(request: QueryRequest, service: DBEngineService = Depends(DBEngineService)):
     results = service.ollama_answer(request.question)
     return {"results": results}
 
@@ -65,3 +65,9 @@ def query_documents_ollama(request: QueryRequest, service: DBService = Depends(D
 def clear_database(service: DBService = Depends(DBService)):
     service.clear_database()
     return {"status": "Vector database cleared."}
+
+
+@app.get("/is-empty/")
+def is_database_empty(service: DBService = Depends(DBService)):
+    empty = service.check_empty()
+    return {"is_empty": empty}
