@@ -1,97 +1,181 @@
+:root {
+    --bg-color: #f4f4f5;
+    --card-bg: #ffffff;
+    --text-main: #18181b;
+    --text-muted: #71717a;
+    --border-color: #e4e4e7;
+    --primary-color: #27272a;
+    --primary-hover: #3f3f46;
+    --radius: 8px;
+    --shadow: 0 1px 3px 0 rgb(0 0 0 / 0.1), 0 1px 2px -1px rgb(0 0 0 / 0.1);
+}
+
 * {
     margin: 0;
     padding: 0;
     box-sizing: border-box;
-    font-family: Arial, sans-serif;
 }
 
-.hidden {
-    display: none;
+body {
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+    background-color: var(--bg-color);
+    color: var(--text-main);
+    line-height: 1.5;
+    padding: 2rem;
+    max-width: 1000px;
+    margin: 0 auto;
+}
+
+h1, h2, h3 {
+    color: var(--text-main);
+    margin-bottom: 1rem;
 }
 
 #title {
     text-align: center;
-    margin-top: 2rem;
+    margin-bottom: 2rem;
+    font-size: 2.5rem;
+    font-weight: 700;
+    margin-top: 0;
 }
 
-#upload, #question {
-    width: 60%;
-    margin: 2rem auto;
-    padding: 1.5rem;
-    border: 1px solid #ccc;
-    border-radius: 5px;
-    background-color: #f9f9f9;
-    text-align: center;
+#upload, #question, #answer {
+    background-color: var(--card-bg);
+    border: 1px solid var(--border-color);
+    border-radius: var(--radius);
+    padding: 2rem;
+    margin-bottom: 2rem;
+    box-shadow: var(--shadow);
 }
 
-#upload input, #question input {
-    width: 80%;
-    padding: 0.6rem;
+.hidden {
+    display: none !important;
+}
+
+/* Upload Section */
+#uploadMethods {
+    display: flex;
+    flex-direction: column;
+    gap: 1.5rem;
+}
+
+#uploadMethods > div {
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+}
+
+input[type="text"],
+input[type="file"] {
+    width: 100%;
+    padding: 0.75rem;
+    border: 1px solid var(--border-color);
+    border-radius: var(--radius);
     font-size: 1rem;
-    margin: 0.5rem 0;
+    transition: border-color 0.2s;
+    background-color: #fff;
 }
 
-#upload button, #question button {
-    padding: 0.5rem 1rem;
+input[type="text"]:focus {
+    outline: none;
+    border-color: var(--primary-color);
+}
+
+button {
+    background-color: var(--primary-color);
+    color: white;
+    border: none;
+    padding: 0.75rem 1.5rem;
+    border-radius: var(--radius);
     font-size: 1rem;
     cursor: pointer;
-    margin-left: 1rem;
+    transition: background-color 0.2s;
+    font-weight: 500;
 }
 
-#geminiInfo {
-    text-align: center;
-    margin-top: 0.8rem;
-    font-size: 0.9rem;
-    font-style: italic;
+button:hover {
+    background-color: var(--primary-hover);
 }
 
-#llamaInfo {
-    text-align: center;
-    margin-top: 0.8rem;
-    font-size: 0.9rem;
-    font-style: italic;
+button:disabled {
+    opacity: 0.5;
+    cursor: not-allowed;
 }
 
-#llamaResponseTime {
-    text-align: center;
-    margin-top: 0.5rem;
-    font-size: 0.9rem;
-    font-style: italic;
+/* Question Section */
+#questionInput {
+    margin-bottom: 1rem;
 }
 
 #askButtons {
     display: flex;
+    gap: 1rem;
+    flex-wrap: wrap;
     justify-content: center;
-    gap: 2rem;
-    margin-top: 1rem;
 }
 
+#askButtons > div {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    min-width: 200px;
+}
+
+#askButtons button {
+    width: 100%;
+}
+
+#geminiInfo, #llamaInfo, #llamaResponseTime {
+    font-size: 0.85rem;
+    color: var(--text-muted);
+    margin-top: 0.5rem;
+    font-style: normal;
+    text-align: center;
+}
+
+/* Answer Section */
 #answer {
-    text-align: center;
-    width: 60%;
-    margin: 2rem auto;
-    padding: 1.5rem;
-    min-height: 100px;
+    min-height: auto;
 }
 
+#answer h3 {
+    margin-top: 0;
+}
+
+/* Restart Section */
 #restart {
-    width: 60%;
-    margin: 2rem auto;
-    padding: 1.5rem;
     text-align: center;
+    padding: 0;
+    margin: 2rem 0;
 }
 
 #restart button {
-    padding: 0.5rem 1rem;
-    font-size: 1rem;
-    cursor: pointer;
-    margin-bottom: 1rem;
+    background-color: transparent;
+    border: 1px solid var(--border-color);
+    color: var(--text-muted);
+}
+
+#restart button:hover {
+    background-color: var(--border-color);
+    color: var(--text-main);
+}
+
+#restart h3 {
+    font-size: 0.9rem;
+    color: var(--text-muted);
+    font-weight: normal;
+    margin-top: 0.5rem;
 }
 
 #emptyMessage {
     text-align: center;
-    margin: 1rem;
-    font-size: 1rem;
-    color: #555;
+    color: var(--text-muted);
+    margin-top: 1rem;
     font-style: italic;
+}
+
+#uploadLoading, #answerLoading, #restartLoading {
+    text-align: center;
+    color: var(--text-muted);
+    margin-top: 1rem;
 }
