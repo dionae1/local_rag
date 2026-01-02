@@ -115,7 +115,7 @@ restartButton.addEventListener('click', async () => {
     answerDiv.innerHTML = '';
 
     try {
-        response = await fetch(`${baseURL}/clear-database/`, {
+        response = await fetch(`${baseURL}/database/`, {
             method: 'DELETE'
         });
 
@@ -138,7 +138,7 @@ restartButton.addEventListener('click', async () => {
 
 document.addEventListener('DOMContentLoaded', async () => {
     try {
-        response = await fetch(`${baseURL}/is-empty/`, {
+        response = await fetch(`${baseURL}/database/`, {
             method: 'GET'
         });
 

@@ -85,7 +85,7 @@ def clear_database(service: DBService = Depends(DBService)):
     return {"status": "Vector database cleared."}
 
 
-@app.get("/database /")
+@app.get("/database/")
 def is_database_empty(service: DBService = Depends(DBService)):
     empty = service.check_empty()
     return {"is_empty": empty}
