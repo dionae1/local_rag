@@ -20,10 +20,10 @@ def build_llm(model_type: str, **kwargs) -> LLM:
         return DummyLLM()
 
 class UploadService:
-    def __init__(self, file_path: str, db = None):
+    def __init__(self, file_path: str, db = None, engine = None):
         self.file_path = file_path
         self.parser = DocumentParser(file_path)
-        self.engine = EmbeddingEngine()
+        self.engine = engine or EmbeddingEngine()
         self.db = db or get_vector_db()
 
     def insert_documents(self):
