@@ -9,6 +9,7 @@ from templates import chat_template
 from llm.gemini import GeminiLLM
 from llm.ollama import OllamaLLM
 from llm.dummy import DummyLLM
+from llm.transformers import TransformersLLM
 from llm.base import LLM
 
 def build_llm(model_type: str, **kwargs) -> LLM:
@@ -16,8 +17,10 @@ def build_llm(model_type: str, **kwargs) -> LLM:
         return GeminiLLM(model_name=kwargs.get("model_name", "gemini-2.5-flash"))
     elif model_type == "ollama":
         return OllamaLLM(model_name=kwargs.get("model_name", "llama3"), base_url=kwargs.get("base_url", "http://localhost:11434"), temperature=kwargs.get("temperature", 0.7))
-    else:
+    elif model_type == "dummy":
         return DummyLLM()
+    else:
+        return TransformersLLM(model_name=kwargs.get("model_name", model_type))
 
 class UploadService:
     def __init__(self, file_path: str, db = None, engine = None):
